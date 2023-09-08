@@ -13,7 +13,8 @@ public class HelloWorldController {
 	private final AtomicLong counter = new AtomicLong();
 	
 	@RequestMapping("/hello-world")
-	public HelloWorld helloWorld(@RequestParam(value = "name", defaultValue = "World") String name) {
+	public HelloWorld helloWorld(@RequestParam(value = "teste", defaultValue = "World") String name) {
+		System.out.println(name);
 		return new HelloWorld(counter.incrementAndGet(), String.format(template, name));
 	}
 }
