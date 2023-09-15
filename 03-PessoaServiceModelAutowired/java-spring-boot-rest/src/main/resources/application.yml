@@ -1,0 +1,14 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/java_spring_mysql?useTimezone=true&serverTimezone=UTC #evitando problemas de time zone com esses parametros ?useTimezone=true&serverTimezone=UTC
+    username: spyrado
+    password: admin123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect # informando o dialeto que o hibernate vai utilizar para se comunicar com o banco de dados 
+      show-sql: false # mudar para true quando quiser debugar

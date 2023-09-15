@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.nicolas.exceptions.ExceptionResponse;
-import br.com.nicolas.exceptions.UnsupportedMathOperationException;
+import br.com.nicolas.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice() // é como se fosse o interceptor do angular
 @RestController()
@@ -28,7 +28,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ExceptionHandler(UnsupportedMathOperationException.class)
+	@ExceptionHandler(ResourceNotFoundException.class)
 	public final ResponseEntity<ExceptionResponse> handleBadRequestExeption(Exception exception, WebRequest request) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse(
 			new Date(), 
