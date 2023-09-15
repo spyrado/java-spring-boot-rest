@@ -1,6 +1,5 @@
 package br.com.nicolas.services;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ public class PessoaServices {
 	
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	private Logger logger = Logger.getLogger(PessoaServices.class.getName());
 
 	public Pessoa buscaPorId(Long id) {
 		return pessoaRepository.findById(id)
