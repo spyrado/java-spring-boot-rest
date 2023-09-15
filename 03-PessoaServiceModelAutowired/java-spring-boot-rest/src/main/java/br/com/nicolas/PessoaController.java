@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,9 +29,8 @@ public class PessoaController {
 	@Autowired
 	private PessoaServices pessoaService;
 	
-	@RequestMapping(
-		path = "/{id}", 
-		method = RequestMethod.GET, 
+	@GetMapping(
+		path = "/{id}",
 		produces = MediaType.APPLICATION_JSON_VALUE
 	)
 	public Pessoa buscaPorId(
@@ -36,16 +39,12 @@ public class PessoaController {
 		return pessoaService.buscaPorId(Long.parseLong(id));
 	}
 	
-	@RequestMapping(
-		method = RequestMethod.GET, 
-		produces = MediaType.APPLICATION_JSON_VALUE
-	)
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Pessoa> pessoas() {
 		return pessoaService.pegaTudo();
 	}
 	
-	@RequestMapping(
-		method = RequestMethod.POST,
+	@PostMapping(
 		consumes = MediaType.APPLICATION_JSON_VALUE, // consome JSON
 		produces = MediaType.APPLICATION_JSON_VALUE // produz JSON
 	)
@@ -54,11 +53,10 @@ public class PessoaController {
 		return pessoaService.cria(pessoa);
 	}
 	
-	@RequestMapping(
+	@PutMapping(
 		path = "/{id}",
-		method = RequestMethod.PUT,
 		consumes = MediaType.APPLICATION_JSON_VALUE,
-		produces = MediaType.APPLICATION_JSON_VALUE
+		produces = MediaType.APPLICATION_JSON_VALUE 
 	)
 	public Pessoa atualiza(
 			@RequestBody Pessoa pessoa,
@@ -67,10 +65,7 @@ public class PessoaController {
 		return pessoaService.atualiza(id, pessoa);
 	}
 	
-	@RequestMapping(
-		path = "/{id}",
-		method = RequestMethod.DELETE
-	)
+	@DeleteMapping(path = "/{id}")
 	public void deleta(
 			@PathVariable(value = "id") Long id) {
 		pessoaService.deleta(id);
