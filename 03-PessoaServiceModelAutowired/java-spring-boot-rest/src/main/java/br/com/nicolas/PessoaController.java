@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.nicolas.models.Pessoa;
+import br.com.nicolas.data.vo.v1.PessoaVO;
 import br.com.nicolas.services.PessoaServices;
 
 @RestController
@@ -32,14 +32,14 @@ public class PessoaController {
 		path = "/{id}",
 		produces = MediaType.APPLICATION_JSON_VALUE
 	)
-	public Pessoa buscaPorId(
+	public PessoaVO buscaPorId(
 		@PathVariable(value = "id") String id
 	) {
 		return pessoaService.buscaPorId(Long.parseLong(id));
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Pessoa> pessoas() {
+	public List<PessoaVO> pessoas() {
 		return pessoaService.pegaTudo();
 	}
 	
@@ -47,8 +47,8 @@ public class PessoaController {
 		consumes = MediaType.APPLICATION_JSON_VALUE, // consome JSON
 		produces = MediaType.APPLICATION_JSON_VALUE // produz JSON
 	)
-	public Pessoa cria(
-			@RequestBody Pessoa pessoa) {
+	public PessoaVO cria(
+			@RequestBody PessoaVO pessoa) {
 		return pessoaService.cria(pessoa);
 	}
 	
@@ -57,8 +57,8 @@ public class PessoaController {
 		consumes = MediaType.APPLICATION_JSON_VALUE,
 		produces = MediaType.APPLICATION_JSON_VALUE 
 	)
-	public Pessoa atualiza(
-			@RequestBody Pessoa pessoa,
+	public PessoaVO atualiza(
+			@RequestBody PessoaVO pessoa,
 			@PathVariable(value = "id") Long id
 		) {
 		return pessoaService.atualiza(id, pessoa);
