@@ -33,9 +33,9 @@ public class PessoaController {
 		produces = MediaType.APPLICATION_JSON_VALUE
 	)
 	public PessoaVO buscaPorId(
-		@PathVariable(value = "id") String id
+		@PathVariable(value = "id") Long id
 	) {
-		return pessoaService.buscaPorId(Long.parseLong(id));
+		return pessoaService.buscaPorId(id);
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,6 +49,7 @@ public class PessoaController {
 	)
 	public PessoaVO cria(
 			@RequestBody PessoaVO pessoa) {
+		
 		return pessoaService.cria(pessoa);
 	}
 	
@@ -61,6 +62,7 @@ public class PessoaController {
 			@RequestBody PessoaVO pessoa,
 			@PathVariable(value = "id") Long id
 		) {
+		
 		return pessoaService.atualiza(id, pessoa);
 	}
 	
