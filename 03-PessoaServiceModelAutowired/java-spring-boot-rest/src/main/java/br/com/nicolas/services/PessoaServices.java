@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.nicolas.data.vo.v1.PessoaVO;
+import br.com.nicolas.data.vo.v2.PessoaVOV2;
 import br.com.nicolas.exceptions.ResourceNotFoundException;
 import br.com.nicolas.mapper.DozerMapper;
+import br.com.nicolas.mapper.custom.PessoaMapper;
 import br.com.nicolas.models.Pessoa;
 import br.com.nicolas.repositories.PessoaRepository;
 
@@ -15,6 +17,9 @@ public class PessoaServices {
 	
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	
+	@Autowired
+	private PessoaMapper pessoaMapper;
 	
 	public PessoaVO buscaPorId(Long id) {
 		Pessoa entity = buscaPorIdEntity(id);
@@ -41,6 +46,19 @@ public class PessoaServices {
 		entity.setGenero(pessoa.getGenero());
 		
 		PessoaVO vo = DozerMapper.parseObjeto(pessoaRepository.save(entity), PessoaVO.class);
+		return vo;
+	}
+	
+public PessoaVOV2 atualizaV2(Long id, PessoaVOV2 pessoa) {
+		
+		Pessoa entity = buscaPorIdEntity(id);
+		
+		entity.setPrimeiroNome(pessoa.getPrimeiroNome());
+		entity.setSobrenome(pessoa.getSobrenome());
+		entity.setEndereco(pessoa.getEndereco());
+		entity.setGenero(pessoa.getGenero());
+		
+		PessoaVOV2 vo = pessoaMapper.converteEntidadeParaVO(pessoaRepository.save(entity));
 		return vo;
 	}
 	

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.nicolas.data.vo.v1.PessoaVO;
+import br.com.nicolas.data.vo.v2.PessoaVOV2;
 import br.com.nicolas.services.PessoaServices;
 
 @RestController
@@ -27,6 +28,7 @@ public class PessoaController {
 	// Como é feito hoje em dia com @Autowired
 	@Autowired
 	private PessoaServices pessoaService;
+
 	
 	@GetMapping(
 		path = "/{id}",
@@ -65,6 +67,19 @@ public class PessoaController {
 		
 		return pessoaService.atualiza(id, pessoa);
 	}
+	
+	@PutMapping(
+			path = "/v2/{id}",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE 
+		)
+		public PessoaVOV2 atualizaV2(
+				@RequestBody PessoaVOV2 pessoa,
+				@PathVariable(value = "id") Long id
+			) {
+			
+			return pessoaService.atualizaV2(id, pessoa);
+		}
 	
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<?> deleta(
