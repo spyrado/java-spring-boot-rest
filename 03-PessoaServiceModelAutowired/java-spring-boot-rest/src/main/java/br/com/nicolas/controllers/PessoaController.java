@@ -1,4 +1,4 @@
-package br.com.nicolas;
+package br.com.nicolas.controllers;
 
 import java.util.List;
 
