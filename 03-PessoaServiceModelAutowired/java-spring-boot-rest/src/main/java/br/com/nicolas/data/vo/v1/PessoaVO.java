@@ -1,17 +1,23 @@
 package br.com.nicolas.data.vo.v1;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.io.Serializable;
 import java.util.Objects;
-
+@JsonPropertyOrder({"id", "primeiroNome", "sobrenome", "endereco", "genero"})
 public class PessoaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 
 	private Long id;
+	@JsonProperty("primeiro_nome")
 	private String primeiroNome;
 	private String sobrenome;
 	private String endereco;
+	@JsonIgnore
 	private String genero;
 	
 	public PessoaVO() {}

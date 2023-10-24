@@ -14,7 +14,7 @@
 	<name>java-spring-boot-rest</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>17.0.8</java.version>
 		<dozer.version>6.4.0</dozer.version>
 	</properties>
 	<dependencies>
@@ -43,13 +43,30 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		
-			<!-- Dozer -->
+
 		<dependency>
-    	<groupId>com.github.dozermapper</groupId>
-    	<artifactId>dozer-core</artifactId>
-    	<version>${dozer.version}</version>
-    </dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+
+		<!-- Dozer -->
+		<dependency>
+			<groupId>com.github.dozermapper</groupId>
+			<artifactId>dozer-core</artifactId>
+			<version>${dozer.version}</version>
+		</dependency>
+
+		<!-- FlyWay -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>9.22.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-mysql</artifactId>
+			<version>9.22.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

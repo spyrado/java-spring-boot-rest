@@ -7,7 +7,7 @@ spring:
     password: admin123
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none # update | none | ?? -> update faz com que o hibernate baseado nas entidades gere o banco, o none já faz com que ele não gere, apenas manipule as infos dentro de um banco ja criado (insert,update,delete)
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect # informando o dialeto que o hibernate vai utilizar para se comunicar com o banco de dados 
