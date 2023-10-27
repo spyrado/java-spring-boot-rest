@@ -26,7 +26,7 @@ public class PessoaServices {
 		return DozerMapper.parseObjeto(entity, PessoaVO.class);
 	}
 	
-	public List<PessoaVO> pegaTudo() {
+	public List<PessoaVO> buscaTudo() {
 		return DozerMapper.parseListaObjetos(pessoaRepository.findAll(), PessoaVO.class);
 	}
 	
