@@ -1,33 +1,34 @@
 package br.com.nicolas.data.vo.v1;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.github.dozermapper.core.Mapping;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Objects;
 @JsonPropertyOrder({"id", "primeiroNome", "sobrenome", "endereco", "genero"})
-public class PessoaVO implements Serializable {
+public class PessoaVO extends RepresentationModel<PessoaVO> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 
-	private Long id;
+	@Mapping("id") // o dozer n consegue fazer o parser pois a entidade é id e a vo é key, então para ele conseguir temos que fazer o Mapping de key para id
+	private Long key;
 	@JsonProperty("primeiro_nome")
 	private String primeiroNome;
 	private String sobrenome;
 	private String endereco;
-	@JsonIgnore
 	private String genero;
 	
 	public PessoaVO() {}
 
-	public Long getId() {
-		return id;
+	public Long getKey() {
+		return key;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setKey(Long key) {
+		this.key = key;
 	}
 
 	public String getPrimeiroNome() {
@@ -62,26 +63,18 @@ public class PessoaVO implements Serializable {
 		this.genero = genero;
 	}
 
+
 	@Override
-	public int hashCode() {
-		return Objects.hash(endereco, genero, id, primeiroNome, sobrenome);
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		PessoaVO pessoaVO = (PessoaVO) o;
+		return Objects.equals(key, pessoaVO.key) && Objects.equals(primeiroNome, pessoaVO.primeiroNome) && Objects.equals(sobrenome, pessoaVO.sobrenome) && Objects.equals(endereco, pessoaVO.endereco) && Objects.equals(genero, pessoaVO.genero);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PessoaVO other = (PessoaVO) obj;
-		return Objects.equals(endereco, other.endereco) && Objects.equals(genero, other.genero)
-				&& Objects.equals(id, other.id) && Objects.equals(primeiroNome, other.primeiroNome)
-				&& Objects.equals(sobrenome, other.sobrenome);
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), key, primeiroNome, sobrenome, endereco, genero);
 	}
-	
-	
-	
-	
 }

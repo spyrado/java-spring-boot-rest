@@ -1,8 +1,11 @@
 package br.com.nicolas.services;
 import java.util.List;
 
+import br.com.nicolas.controllers.PessoaController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import br.com.nicolas.data.vo.v1.PessoaVO;
 import br.com.nicolas.data.vo.v2.PessoaVOV2;
@@ -23,7 +26,9 @@ public class PessoaServices {
 	
 	public PessoaVO buscaPorId(Long id) {
 		Pessoa entity = buscaPorIdEntity(id);
-		return DozerMapper.parseObjeto(entity, PessoaVO.class);
+		PessoaVO vo = DozerMapper.parseObjeto(entity, PessoaVO.class);
+		vo.add(linkTo(methodOn(PessoaController.class).buscaPorId(id)).withSelfRel());
+		return vo;
 	}
 	
 	public List<PessoaVO> buscaTudo() {
