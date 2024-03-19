@@ -14,6 +14,7 @@ public class PessoaVO extends RepresentationModel<PessoaVO> implements Serializa
 
 
 	@Mapping("id") // o dozer n consegue fazer o parser pois a entidade é id e a vo é key, então para ele conseguir temos que fazer o Mapping de key para id
+	@JsonProperty("id")
 	private Long key;
 	@JsonProperty("primeiro_nome")
 	private String primeiroNome;
