@@ -73,10 +73,8 @@ public PessoaVOV2 atualizaV2(Long id, PessoaVOV2 pessoa) {
 		return vo;
 	}
 	
-	public void deleta(Long id) {
-		
-		Pessoa entity = buscaPorIdEntity(id);
-		pessoaRepository.delete(entity);
+	public void deletaPorId(Long id) {
+		pessoaRepository.deleteById(id);
 	}
 	
 	protected Pessoa buscaPorIdEntity(Long id) {
