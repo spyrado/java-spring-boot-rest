@@ -1,6 +1,7 @@
 package br.com.nicolas.services;
 
 import br.com.nicolas.data.vo.v1.PessoaVO;
+import br.com.nicolas.exceptions.RequiredIsNullException;
 import br.com.nicolas.models.Pessoa;
 import br.com.nicolas.repositories.PessoaRepository;
 import br.com.nicolas.unittests.mapper.mocks.MockPessoa;
@@ -69,6 +70,18 @@ class PessoaServicesTest {
 
       var result = pessoaServices.cria(payload);
       assertEquals(1, result.getKey());
+  }
+
+  @Test
+  void lancaExcessaoQuandoPessoaNull() {
+    Exception exception = assertThrows(RequiredIsNullException.class, () -> {
+      pessoaServices.cria(null);
+    });
+
+    String mensagemEsperada = "Não é permitido persistir um objeto nullo.";
+    String mensagemAtual = exception.getMessage();
+
+    assertEquals(mensagemEsperada, mensagemAtual);
   }
 
   @Test

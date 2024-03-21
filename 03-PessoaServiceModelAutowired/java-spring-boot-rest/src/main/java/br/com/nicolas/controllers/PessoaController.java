@@ -32,11 +32,7 @@ public class PessoaController {
 
   @GetMapping(
     path = "/{id}",
-    produces = {
-      MediaType.APPLICATION_JSON,
-      MediaType.APPLICATION_XML,
-      MediaType.APPLICATION_YML
-    }
+    produces = { MediaType.APPLICATION_JSON,  MediaType.APPLICATION_XML,  MediaType.APPLICATION_YML }
   )
   public PessoaVO buscaPorId(
     @PathVariable(value = "id") Long id
@@ -44,45 +40,24 @@ public class PessoaController {
     return pessoaService.buscaPorId(id);
   }
 
-  @GetMapping(produces = {
-    MediaType.APPLICATION_JSON,
-    MediaType.APPLICATION_XML,
-    MediaType.APPLICATION_YML
-  })
+  @GetMapping(produces = { MediaType.APPLICATION_JSON,  MediaType.APPLICATION_XML,  MediaType.APPLICATION_YML })
   public List<PessoaVO> pessoas() {
     return pessoaService.buscaTudo();
   }
 
   @PostMapping(
-    consumes = {
-      MediaType.APPLICATION_JSON,
-      MediaType.APPLICATION_XML,
-      MediaType.APPLICATION_YML
-    }, // consome JSON
-    produces = {
-      MediaType.APPLICATION_JSON,
-      MediaType.APPLICATION_XML,
-      MediaType.APPLICATION_YML
-    } // produz JSON
+    consumes = { MediaType.APPLICATION_JSON,  MediaType.APPLICATION_XML,  MediaType.APPLICATION_YML }, // consome JSON
+    produces = { MediaType.APPLICATION_JSON,  MediaType.APPLICATION_XML,  MediaType.APPLICATION_YML } // produz JSON
   )
-  public PessoaVO cria(
-    @RequestBody PessoaVO pessoa) {
-
+  public PessoaVO cria(@RequestBody(required = false) PessoaVO pessoa) {
+    System.out.println(pessoa);
     return pessoaService.cria(pessoa);
   }
 
   @PutMapping(
     path = "/{id}",
-    consumes = {
-      MediaType.APPLICATION_JSON,
-      MediaType.APPLICATION_XML,
-      MediaType.APPLICATION_YML
-    },
-    produces = {
-      MediaType.APPLICATION_JSON,
-      MediaType.APPLICATION_XML,
-      MediaType.APPLICATION_YML
-    }
+    consumes = { MediaType.APPLICATION_JSON,  MediaType.APPLICATION_XML,  MediaType.APPLICATION_YML },
+    produces = { MediaType.APPLICATION_JSON,  MediaType.APPLICATION_XML,  MediaType.APPLICATION_YML }
   )
   public PessoaVO atualiza(
     @RequestBody PessoaVO pessoa,
@@ -94,16 +69,8 @@ public class PessoaController {
 
   @PutMapping(
     path = "/v2/{id}",
-    consumes = {
-      MediaType.APPLICATION_JSON,
-      MediaType.APPLICATION_XML,
-      MediaType.APPLICATION_YML
-    },
-    produces = {
-      MediaType.APPLICATION_JSON,
-      MediaType.APPLICATION_XML,
-      MediaType.APPLICATION_YML
-    }
+    consumes = { MediaType.APPLICATION_JSON,  MediaType.APPLICATION_XML,  MediaType.APPLICATION_YML },
+    produces = { MediaType.APPLICATION_JSON,  MediaType.APPLICATION_XML,  MediaType.APPLICATION_YML }
   )
   public PessoaVOV2 atualizaV2(
     @RequestBody PessoaVOV2 pessoa,

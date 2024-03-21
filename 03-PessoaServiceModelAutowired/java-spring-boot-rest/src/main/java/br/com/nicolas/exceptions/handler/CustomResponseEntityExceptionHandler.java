@@ -2,6 +2,7 @@ package br.com.nicolas.exceptions.handler;
 
 import java.util.Date;
 
+import br.com.nicolas.exceptions.RequiredIsNullException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,9 +30,19 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 	}
 	
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public final ResponseEntity<ExceptionResponse> handleBadRequestExeption(Exception exception, WebRequest request) {
+	public final ResponseEntity<ExceptionResponse> handleNotFoundException(Exception exception, WebRequest request) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse(
 			new Date(), 
+			exception.getMessage(),
+			request.getDescription(false)
+		);
+		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(RequiredIsNullException.class)
+	public final ResponseEntity<ExceptionResponse> handleBadRequestExeption(Exception exception, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(
+			new Date(),
 			exception.getMessage(),
 			request.getDescription(false)
 		);

@@ -2,6 +2,7 @@ package br.com.nicolas.services;
 import java.util.List;
 
 import br.com.nicolas.controllers.PessoaController;
+import br.com.nicolas.exceptions.RequiredIsNullException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -40,6 +41,7 @@ public class PessoaServices {
 	}
 	
 	public PessoaVO cria(PessoaVO pessoa) {
+		if(pessoa == null) throw new RequiredIsNullException();
 		Pessoa entity = DozerMapper.parseObjeto(pessoa, Pessoa.class);
 		PessoaVO vo = DozerMapper.parseObjeto(pessoaRepository.save(entity), PessoaVO.class);
 		vo.add(linkTo(methodOn(PessoaController.class).buscaPorId(vo.getKey())).withSelfRel());
